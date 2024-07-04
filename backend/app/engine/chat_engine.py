@@ -7,11 +7,11 @@ def get_chat_engine():
     top_k = 3
 
     index = get_index()
-    if index is None: # change this to run generate index on first request from user and then check this
+    if index is None:
         raise HTTPException(
             status_code=500,
             detail=str(
-                "StorageContext is empty - call 'poetry run generate' to generate the storage first"
+                "Error getting index..."
             ),
         )
 
