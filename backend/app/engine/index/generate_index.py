@@ -1,19 +1,20 @@
-from dotenv import load_dotenv
-
-load_dotenv()
-
 import os
 import logging
+from dotenv import load_dotenv
+from typing import List, Optional
+
 from fastapi import UploadFile
-from typing import List
 from llama_index.core.settings import Settings
 from llama_index.core.ingestion import IngestionPipeline
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.storage.docstore import SimpleDocumentStore
 from llama_index.core.storage import StorageContext
+
 from engine.settings import init_settings
-from index.loaders import load_documents
-from index.vectordb import get_vector_store
+from ..index.loaders import load_documents
+from ..index.vectordb import get_vector_store
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -36,7 +37,7 @@ def run_pipeline(docstore, vector_store, documents):
             Settings.embed_model,
         ],
         docstore=docstore,
-        docstore_strategy="upserts_and_delete",
+        docstore_strategy="upserts",
         vector_store=vector_store,
     )
 
@@ -52,7 +53,7 @@ def persist_storage(docstore, vector_store):
     )
     storage_context.persist(STORAGE_DIR)
 
-def generate_datasource(file: UploadFile, web_urls: List[str]):
+def generate_datasource(file: Optional[UploadFile] = None, web_urls: Optional[List[str]] = None):
     init_settings()
     logger.info("Generating index for the provided data")
 
