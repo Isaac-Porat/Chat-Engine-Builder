@@ -1,7 +1,7 @@
 from typing import Optional, List
 from fastapi import UploadFile
-from loaders.web import WebLoaderConfig, get_web_documents
-from loaders.file import get_file_documents
+from .file import get_file_documents
+from .web import get_web_documents
 
 def load_documents(file: Optional[UploadFile] = None, web_links: Optional[List[str]] = None):
     documents = []
