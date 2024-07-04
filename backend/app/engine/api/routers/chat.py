@@ -5,10 +5,10 @@ from aiostream import stream
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from llama_index.core.chat_engine.types import BaseChatEngine
 from llama_index.core.llms import MessageRole
-from app.engine import get_chat_engine
-from api.routers.vercel_response import VercelStreamResponse
-from api.routers.events import EventCallbackHandler
-from api.routers.models import (
+from engine.chat_engine import get_chat_engine
+from .vercel_response import VercelStreamResponse
+from .events import EventCallbackHandler
+from .models import (
     ChatData,
     ChatConfig,
     SourceNodes,
