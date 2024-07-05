@@ -40,8 +40,8 @@ async def engine_settings(data: ChatEngineSettings):
 
         set_settings(model, llm_temp, embedding_model)
 
-        file = data.file
         web_urls = data.web_url
+        file = data.file
 
         generate_datasource(file, web_urls)
 
