@@ -15,13 +15,17 @@ def get_web_documents(urls: List[str]):
 
     from llama_index.readers.web import WholeSiteReader
     from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+
+    options = Options()
+    options.add_argument("--headless=new")
 
     docs = []
     for url in config:
         scraper = WholeSiteReader(
             prefix=url.prefix,
             max_depth=url.max_depth,
-            driver=webdriver.Chrome()
+            driver=webdriver.Chrome(options=options)
         )
         docs.extend(scraper.load_data(url.base_url))
 
