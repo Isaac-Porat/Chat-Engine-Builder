@@ -10,8 +10,8 @@ class ChatEngineSettings(BaseModel):
     model: str
     llm_temperature: float
     embedding_model: str
-    file: Optional[UploadFile] = None
     web_url: Optional[List[str]] = None
+    file: Optional[UploadFile] = None
 
     class Config:
         arbitrary_types_allowed = True
